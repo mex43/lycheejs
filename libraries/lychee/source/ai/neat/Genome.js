@@ -104,6 +104,9 @@ lychee.define('lychee.ai.neat.Genome').exports(function(lychee, global, attachme
 
 
 			/*
+			 * relative position to player perspective
+			 * (input is a matrix array)
+			 *
 			 * input value = -1 for sprites
 			 * input value =  1 for tiles (colliding objects)
 			 * input value =  0 for free tiles
