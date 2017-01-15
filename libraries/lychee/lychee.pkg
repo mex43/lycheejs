@@ -155,6 +155,12 @@
 				"neat": {
 					"Agent": [
 						"js"
+					],
+					"Gene": [
+						"js"
+					],
+					"Genome": [
+						"js"
 					]
 				}
 			},
