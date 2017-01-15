@@ -52,6 +52,49 @@ lychee.define('lychee.ai.neat.Genome').exports(function(lychee, global, attachme
 
 		},
 
+		crossoverGenome: function(other) {
+
+			let g1 = null;
+			let g2 = null;
+
+			if (other.fitness > this.fitness) {
+
+				g1 = other;
+				g2 = this;
+
+			} else {
+
+				g1 = this;
+				g2 = other;
+
+			}
+
+
+			let child       = new Composite();
+			let innovations = {};
+
+			g2.genes.forEach(gene => {
+				innovations[gene.innovation] = gene;
+			});
+
+			g1.genes.forEach(function(gene1, g) {
+
+				let gene2 = innovations[gene1.innovation] || null;
+				if (gene2 !== null && gene2.enabled === true && Math.random() > 0.5) {
+					child.genes.push(gene2.copyGene());
+				} else {
+					child.genes.push(gene1.copyGene());
+				}
+
+			});
+
+			child.maxneuron = Math.max(g1.maxneuron, g2.maxneuron);
+
+
+			return child;
+
+		},
+
 		generateNetwork: function(inputs, outputs) {
 
 			let network = {};
@@ -148,6 +191,58 @@ lychee.define('lychee.ai.neat.Genome').exports(function(lychee, global, attachme
 			});
 
 			return outputs;
+
+		},
+
+		randomNeuron: function(nonInput, inputs, outputs) {
+
+			let neurons = [];
+
+			if (nonInput === false) {
+
+				inputs.forEach(function(input, i) {
+					neurons.push(i);
+				});
+
+				this.genes.forEach(gene => {
+
+					if (neurons.indexOf(gene.into) === -1) {
+						neurons.push(gene.into);
+					}
+
+					if (neurons.indexOf(gene.out) === -1) {
+						neurons.push(gene.out);
+					}
+
+				});
+
+			} else {
+
+				this.genes.forEach(gene => {
+
+					if (neurons.indexOf(gene.into) === -1 && gene.into > inputs.length) {
+						neurons.push(gene.into);
+					}
+
+					if (neurons.indexOf(gene.out) === -1 && gene.out > inputs.length) {
+						neurons.push(gene.out);
+					}
+
+				});
+
+			}
+
+			outputs.forEach(function(output, o) {
+				neurons.push(_MAX_NODES + o);
+			});
+
+
+			let neuron = neurons[(Math.random() * neurons.length) | 0] || null;
+			if (neuron === null) {
+				return neurons[0];
+			}
+
+			return neuron;
 
 		}
 
