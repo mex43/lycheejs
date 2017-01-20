@@ -14,21 +14,6 @@ lychee.define('lychee.ai.neat.Gene').exports(function(lychee, global, attachment
 
 	Composite.prototype = {
 
-		copyGene: function() {
-
-			let clone = new Composite();
-
-			clone.into       = this.into;
-			clone.out        = this.out;
-			clone.weight     = this.weight;
-			clone.enabled    = this.enabled;
-			clone.innovation = this.innovation;
-
-
-			return clone;
-
-		}
-
 	};
 
 

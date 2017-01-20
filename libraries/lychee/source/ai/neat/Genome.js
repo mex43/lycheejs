@@ -54,44 +54,7 @@ lychee.define('lychee.ai.neat.Genome').exports(function(lychee, global, attachme
 
 		crossoverGenome: function(other) {
 
-			let g1 = null;
-			let g2 = null;
-
-			if (other.fitness > this.fitness) {
-
-				g1 = other;
-				g2 = this;
-
-			} else {
-
-				g1 = this;
-				g2 = other;
-
-			}
-
-
-			let child       = new Composite();
-			let innovations = {};
-
-			g2.genes.forEach(gene => {
-				innovations[gene.innovation] = gene;
-			});
-
-			g1.genes.forEach(function(gene1, g) {
-
-				let gene2 = innovations[gene1.innovation] || null;
-				if (gene2 !== null && gene2.enabled === true && Math.random() > 0.5) {
-					child.genes.push(gene2.copyGene());
-				} else {
-					child.genes.push(gene1.copyGene());
-				}
-
-			});
-
-			child.maxneuron = Math.max(g1.maxneuron, g2.maxneuron);
-
-
-			return child;
+			// XXX: Implemented as agent.crossover(other)
 
 		},
 
