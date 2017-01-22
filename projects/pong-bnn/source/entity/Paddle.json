@@ -6,7 +6,7 @@
 
 	"states": {
 		"evil": { "animation": false },
-		"good":  { "animation": false }
+		"good": { "animation": false }
 	},
 
 	"map": {

@@ -2,6 +2,7 @@
 lychee.define('harvester.Watcher').requires([
 	'harvester.data.Filesystem',
 	'harvester.data.Project',
+	'harvester.mod.Beautifier',
 	'harvester.mod.Fertilizer',
 	'harvester.mod.Packager',
 	'harvester.mod.Server'
@@ -12,6 +13,7 @@ lychee.define('harvester.Watcher').requires([
 	const _Filesystem = lychee.import('harvester.data.Filesystem');
 	const _Project    = lychee.import('harvester.data.Project');
 	const _mod        = {
+		Beautifier: lychee.import('harvester.mod.Beautifier'),
 		Fertilizer: lychee.import('harvester.mod.Fertilizer'),
 		Packager:   lychee.import('harvester.mod.Packager'),
 		Server:     lychee.import('harvester.mod.Server'),
@@ -234,6 +236,10 @@ lychee.define('harvester.Watcher').requires([
 					_mod.Packager.process(library);
 				}
 
+				if (_mod.Beautifier !== null && _mod.Beautifier.can(library) === true) {
+					_mod.Beautifier.process(library);
+				}
+
 				if (_mod.Server !== null && _mod.Server.can(library) === true) {
 					_mod.Server.process(library);
 				}
@@ -246,6 +252,10 @@ lychee.define('harvester.Watcher').requires([
 
 				if (_mod.Packager !== null && _mod.Packager.can(project) === true) {
 					_mod.Packager.process(project);
+				}
+
+				if (_mod.Beautifier !== null && _mod.Beautifier.can(project) === true) {
+					_mod.Beautifier.process(project);
 				}
 
 				if (_mod.Server !== null && _mod.Server.can(project) === true) {
