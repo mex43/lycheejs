@@ -48,6 +48,11 @@
 			"Main": [
 				"js"
 			],
+			"ai": {
+				"Agent": [
+					"js"
+				]
+			},
 			"effect": {
 				"Explosion": [
 					"js",
@@ -66,6 +71,11 @@
 					"js",
 					"json",
 					"png"
+				]
+			},
+			"policy": {
+				"Plane": [
+					"js"
 				]
 			},
 			"state": {
